@@ -380,6 +380,33 @@ nav a:hover {
     ...
   </table>
 </section>
+/* 🌟 Improved Ranking Table - Bright Font on Blue */
+.ranking-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1e3a8a; /* Deep blue background */
+  color: #ffffff; /* Bright white text */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+}
+
+.ranking-section thead {
+  background-color: #0f265b;
+  color: #ffffff; /* Bright white headers */
+}
+
+.ranking-section th,
+.ranking-section td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #4f6ecf; /* Light blue line for contrast */
+}
+
+.ranking-section tbody tr:hover {
+  background-color: #2a4cb2; /* Lighter on hover */
+}
 
   
 
