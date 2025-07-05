@@ -126,3 +126,13 @@ footer {
   color: #666;
   font-size: 0.9rem;
 }
+.banner img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 4px solid #2e7d32;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
