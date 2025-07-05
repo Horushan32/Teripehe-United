@@ -229,4 +229,48 @@ footer {
   line-height: 2;
   color: #333;
 }
+.page-title {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #1e3a5f;
+}
+
+.ranking-section {
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ranking-section h2 {
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #1e88e5;
+  padding-bottom: 0.5rem;
+  color: #0d47a1;
+}
+
+.ranking-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ranking-section th,
+.ranking-section td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.ranking-section th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.ranking-section tr:hover {
+  background-color: #f1f8ff;
+}
+
 
