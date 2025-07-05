@@ -307,6 +307,15 @@ nav a {
 nav a:hover,
 nav .active {
   background-color: #
+  /* Headings like ICC */
+h1, h2 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 
 
 
