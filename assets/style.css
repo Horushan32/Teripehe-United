@@ -315,7 +315,42 @@ h1, h2 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+/* Stylish Blue Button */
+.button {
+  background-color: #0073ff;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
 
+.button:hover {
+  background-color: #0059cc;
+}
+<a href="players.html" class="button">View Players</a>
+/* Table Hover Effects */
+table tbody tr:hover {
+  background-color: #1c2541;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Nav & link improvements */
+nav a {
+  color: #f8f8f8;
+  transition: background 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #1e3a8a;
+}
+
+  
 
 
 
