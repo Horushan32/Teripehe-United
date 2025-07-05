@@ -135,4 +135,38 @@ footer {
   border-bottom: 4px solid #2e7d32;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
+/* Promo Banners */
+.promo-banners {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+}
+
+.promo {
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.promo:hover {
+  transform: scale(1.03);
+}
+
+.promo h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
+.promo p {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
 
