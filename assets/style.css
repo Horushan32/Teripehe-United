@@ -169,4 +169,40 @@ footer {
   font-size: 1.1rem;
   letter-spacing: 0.5px;
 }
+/* Banner Image Styling */
+.image-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  margin-bottom: 2rem;
+}
+
+.image-banner img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  color: white;
+}
+
+.banner-text h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
+.banner-text p {
+  font-size: 1.1rem;
+}
 
