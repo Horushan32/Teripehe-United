@@ -1,0 +1,128 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #81c784;
+}
+
+a:hover {
+  color: #a5d6a7;
+}
+
+nav {
+  background-color: #1e1e1e;
+  padding: 1rem;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.nav-menu li a {
+  color: #81c784;
+  font-weight: 600;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-menu li a.active,
+.nav-menu li a:hover {
+  border-color: #81c784;
+}
+
+header {
+  padding: 3rem 1rem 1rem;
+  text-align: center;
+  background: #2e7d32;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  max-width: 150px;
+  margin-bottom: 1rem;
+}
+
+section {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
+
+#about-us p,
+#latest-news ul {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+#latest-news ul {
+  list-style: disc inside;
+}
+
+.player-card {
+  background: #263238;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  max-width: 250px;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.player-card img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #263238;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #424242;
+}
+
+th {
+  background: #1b5e20;
+}
+
+tr:hover {
+  background-color: #37474f;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1e1e1e;
+  color: #666;
+  font-size: 0.9rem;
+}
