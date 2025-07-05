@@ -205,4 +205,28 @@ footer {
 .banner-text p {
   font-size: 1.1rem;
 }
+.ranking-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.ranking-section h2 {
+  text-align: center;
+  color: #2e7d32;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.ranking-section ol {
+  list-style: decimal inside;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  line-height: 2;
+  color: #333;
+}
 
