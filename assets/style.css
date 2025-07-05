@@ -349,6 +349,37 @@ nav a {
 nav a:hover {
   background-color: #1e3a8a;
 }
+/* 🏆 Ranking Table Style - ICC Theme */
+.ranking-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1e3a8a; /* Blue background */
+  color: #ffffff; /* White text */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.ranking-section thead {
+  background-color: #0f265b;
+}
+
+.ranking-section th,
+.ranking-section td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #3b4cca; /* light blue border */
+}
+
+.ranking-section tbody tr:hover {
+  background-color: #2a4cb2;
+}
+<section class="ranking-section">
+  <h2>Team Rankings</h2>
+  <table>
+    ...
+  </table>
+</section>
 
   
 
