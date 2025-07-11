@@ -474,7 +474,31 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-  
+  <style>
+  .event-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 1rem;
+    justify-items: center;
+  }
+
+  .event-gallery img {
+    width: 100%;
+    max-width: 160px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  @media (min-width: 600px) {
+    .event-gallery {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+
 
 
 
