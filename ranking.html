@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teripehe United - Player Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 1rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #222;
+    }
+    nav {
+      background-color: #1b1f3b;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    nav a.active,
+    nav a:hover {
+      background-color: #e91e63;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(233, 30, 99, 0.7);
+    }
+    header {
+      text-align: center;
+      color: #1b1f3b;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+    section.ranking-section {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    section.ranking-section h2 {
+      color: #e91e63;
+      font-size: 1.8rem;
+      border-bottom: 3px solid #e91e63;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
+    thead {
+      background-color: #e91e63;
+      color: white;
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tbody tr:hover {
+      background-color: #ffe1ea;
+      cursor: default;
+    }
+    .badge {
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 12px;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+      display: inline-block;
+      color: #000;
+    }
+    .gold { background: gold; }
+    .silver { background: silver; }
+    .bronze { background: #cd7f32; color: #fff; }
+    /* Responsive */
+    @media (max-width: 720px) {
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      section.ranking-section h2 {
+        font-size: 1.5rem;
+      }
+      table {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/Teripehe-United/index.html">Home</a></li>
+      <li><a href="/Teripehe-United/players.html">Players</a></li>
+      <li><a href="/Teripehe-United/ranking.html" class="active">Ranking</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Teripehe United - Player Rankings</h1>
+  </header>
+
+  <main>
+    <!-- Batting Rankings -->
+    <section class="ranking-section">
+      <h2>🏏 Batting Rankings</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Player</th><th>Team</th><th>Points</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🥇</td><td>Renuka</td><td>Teripehe United</td><td>250</td></tr>
+          <tr><td>🥈</td><td>Nalaka</td><td>Black Lion</td><td>240</td></tr>
+          <tr><td>🥉</td><td>Sapu</td><td>Black Lion</td><td>235</td></tr>
+          <tr><td>4</td><td>Diwan</td><td>Teripehe United</td><td>230</td></tr>
+          <tr><td>5</td><td>Rumesh</td><td>Teripehe United</td><td>220</td></tr>
+          <tr><td>6</td><td>Pathum</td><td>United</td><td>215</td></tr>
+          <tr><td>7</td><td>Chamara</td><td>Teripehe United</td><td>210</td></tr>
+          <tr><td>8</td><td>Amila</td><td>Teripehe United</td><td>205</td></tr>
+          <tr><td>9</td><td>Vishmitha</td><td>Teripehe United</td><td>195</td></tr>
+          <tr><td>10</td><td>Sithumina</td><td>Teripehe United</td><td>190</td></tr>
+          <tr><td>11</td><td>Renuka</td><td>Teripehe United</td><td>185</td></tr>
+          <tr><td>12</td><td>Sashith</td><td>Teripehe United</td><td>180</td></tr>
+          <tr><td>13</td><td>Sumudu</td><td>Teripehe United</td><td>175</td></tr>
+          <tr><td>14</td><td>Harsha</td><td>Teripehe United</td><td>170</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Bowling Rankings -->
+    <section class="ranking-section">
+      <h2>🎯 Bowling Rankings</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Player</th><th>Team</th><th>Wickets</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🥇</td><td>Bojja Max</td><td>Black Lion</td><td>48</td></tr>
+          <tr><td>🥈</td><td>Charuka</td><td>Imbares</td><td>45</td></tr>
+          <tr><td>🥉</td><td>Samidu</td><td>Teripehe United</td><td>43</td></tr>
+          <tr><td>4</td><td>Lal</td><td>Teripehe United</td><td>40</td></tr>
+          <tr><td>5</td><td>Sagara</td><td>Teripehe United</td><td>38</td></tr>
+          <tr><td>6</td><td>Krishantha</td><td>Teripehe United</td><td>36</td></tr>
+          <tr><td>7</td><td>Michel</td><td>Teripehe United</td><td>34</td></tr>
+          <tr><td>8</td><td>Lahiru</td><td>Teripehe United</td><td>33</td></tr>
+          <tr><td>9</td><td>Madura</td><td>Teripehe United</td><td>31</td></tr>
+          <tr><td>10</td><td>Eminda</td><td>Teripehe United</td><td>30</td></tr>
+          <tr><td>11</td><td>Deshan</td><td>Teripehe United</td><td>29</td></tr>
+          <tr><td>12</td><td>Tihan</td><td>Teripehe United</td><td>27</td></tr>
+          <tr><td>13</td><td>Sanjeewa</td><td>Teripehe United</td><td>25</td></tr>
+          <tr><td>14</td><td>Anuja</td><td>Teripehe United</td><td>24</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- All-Rounder Rankings -->
+    <section class="ranking-section">
+      <h2>🧢 All-Rounder Rankings</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Player</th><th>Team</th><th>Performance Index</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🥇</td><td>Vishmitha</td><td>Black Lion</td><td>48</td></tr>
+          <tr><td>🥈</td><td>Sithumina</td><td>Imbares</td><td>45</td></tr>
+          <tr><td>🥉</td><td>Sachin</td><td>Teripehe United</td><td>43</td></tr>
+          <tr><td>4</td><td>Sumudu</td><td>Teripehe United</td><td>85</td></tr>
+          <tr><td>5</td><td>Lal</td><td>Teripehe United</td><td>83</td></tr>
+          <tr><td>6</td><td>Deshan</td><td>Teripehe United</td><td>80</td></tr>
+          <tr><td>7</td><td>Renuka</td><td>Teripehe United</td><td>79</td></tr>
+          <tr><td>8</td><td>Eminda</td><td>Teripehe United</td><td>78</td></tr>
+          <tr><td>9</td><td>Sashith</td><td>Teripehe United</td><td>75</td></tr>
+          <tr><td>10</td><td>Tihan</td><td>Teripehe United</td><td>73</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Emergency Players Rankings -->
+    <section class="ranking-section">
+      <h2>🆘 Emergency Players Ranking</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Player</th><th>Team</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🥇</td><td>Sashith</td><td>Teripehe United</td></tr>
+          <tr><td>🥈</td><td>Anuja</td><td>Teripehe United</td></tr>
+          <tr><td>🥉</td><td>Tihan</td><td>Teripehe United</td></tr>
+          <tr><td>4</td><td>Nalin</td><td>Teripehe United</td></tr>
+          <tr><td>5</td><td>Daham</td><td>Teripehe United</td></tr>
+          <tr><td>6</td><td>Visal</td><td>Teripehe United</td></tr>
+          <tr><td>7</td><td>Nidushan</td><td>Teripehe United</td></tr>
+          <tr><td>8</td><td>Vidushan</td><td>Teripehe United</td></tr>
+          <tr><td>9</td><td>Adisha</td><td>Teripehe United</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Test Batting Rankings -->
+    <section class="ranking-section">
+      <h2>🧪 Test Batting Rankings</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Player</th><th>Team</th><th>Runs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Sashith <span class="badge gold">1</span></td><td>Teripehe United</td><td>450</td></tr>
+          <tr><td>2</td><td>Renuka <span class="badge silver">2</span></td><td>Teripehe United</td><td>430</td></tr>
+          <tr><td>3</td><td>Nalaka <span class="badge bronze">3</span></td><td>Teripehe United</td><td>410</td></tr>
+          <tr><td>4</td><td>Sapu</td><td>Teripehe United</td><td>395</td></tr>
+          <tr><td>5</td><td>Kavidu</td><td>Teripehe United</td><td>390</td></tr>
+          <tr><td>6</td><td>Hasintha</td><td>Teripehe United</td><td>370</td></tr>
+          <tr><td>7</td><td>Nalin</td><td>United</td><td>360</td></tr>
+          <tr><td>8</td><td>Diwan</td><td>Teripehe United</td><td>355</td></tr>
+          <tr><td>9</td><td>Madura</td><td>Teripehe United</td><td>340</td></tr>
+          <tr><td>10</td><td>Tishan</td><td>Teripehe United</td><td>330</td></tr>
+          <tr><td>11</td><td>Charuka</td><td>Teripehe United</td><td>320</td></tr>
+          <tr><td>12</td><td>Kapila</td><td>Teripehe United</td><td>310</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Test Bowling Rankings -->
+    <section class="ranking-section">
+      <h2>🎯 Test Bowling Rankings</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Player</th><th>Team</th><th>Wickets</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Bojja Max <span class="badge gold">1</span></td><td>Teripehe United</td><td>29</td></tr>
+          <tr><td>2</td><td>Sashith <span class="badge silver">2</span></td><td>Teripehe United</td><td>27</td></tr>
+          <tr><td>3</td><td>Tihan <span class="badge bronze">3</span></td><td>Teripehe United</td><td>25</td></tr>
+          <tr><td>4</td><td>Sapu</td><td>Teripehe United</td><td>24</td></tr>
+          <tr><td>5</td><td>Anuja</td><td>Teripehe United</td><td>23</td></tr>
+          <tr><td>6</td><td>Sagaraj</td><td>Teripehe United</td><td>22</td></tr>
+          <tr><td>7</td><td>Samidu</td><td>Teripehe United</td><td>21</td></tr>
+          <tr><td>8</td><td>Lahiru</td><td>Teripehe United</td><td>20</td></tr>
+          <tr><td>9</td><td>Deshan</td><td>Teripehe United</td><td>19</td></tr>
+          <tr><td>10</td><td>Tihan</td><td>Teripehe United</td><td>18</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer style="text-align:center; padding:1rem; color:#555;">
+    © 2025 Teripehe United Cricket Club
+  </footer>
+</body>
+</html>
