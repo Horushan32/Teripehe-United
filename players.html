@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>👤 Player Profiles | Teripehe United</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       background: #f4f6f9;
+      color: #333;
     }
     nav {
       background: #111;
@@ -20,10 +21,20 @@
       text-decoration: none;
       margin: 0 15px;
       font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #e91e63;
+    }
+    nav a.active {
+      color: #e91e63;
+      border-bottom: 2px solid #e91e63;
+      padding-bottom: 3px;
     }
     header {
       text-align: center;
-      padding: 30px 10px;
+      padding: 30px 15px;
       background: #222;
       color: #fff;
     }
@@ -45,36 +56,41 @@
       overflow: hidden;
       width: 230px;
       transition: transform 0.2s ease-in-out;
+      display: flex;
+      flex-direction: column;
     }
     .player-card:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     .player-card img {
       width: 100%;
       height: 230px;
       object-fit: cover;
+      border-bottom: 1px solid #ddd;
     }
     .player-info {
       padding: 15px;
+      flex-grow: 1;
       text-align: center;
     }
     .player-info h2 {
       margin: 10px 0 5px;
-      font-size: 1.2em;
-      color: #333;
+      font-size: 1.3em;
+      color: #222;
     }
     .player-info p {
       margin: 5px 0;
       font-size: 0.95em;
       color: #555;
     }
-    .badge {
-      background: gold;
-      color: #000;
-      padding: 3px 7px;
-      border-radius: 5px;
-      font-size: 0.75em;
-      margin-left: 5px;
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+      margin-top: 40px;
+      font-size: 0.9em;
     }
   </style>
 </head>
@@ -84,13 +100,6 @@
     <a href="index.html">🏠 Home</a>
     <a href="ranking.html">🏆 Rankings</a>
     <a href="players.html" class="active">👤 Players</a>
-    <nav>
-  <ul class="nav-menu">
-    <li><a href="index.html" class="active">Home</a></li>
-    ...
-  </ul>
-</nav>
-
   </nav>
 
   <header>
@@ -100,12 +109,11 @@
 
   <section class="players-section">
     <div class="player-grid">
-            <!-- Player 1 -->
+      <!-- Player 1 -->
       <div class="player-card">
-        <img src="assets/assets/images
-/IMG_5823.jpeg" alt="Harsha">
+        <img src="assets/assets/images/IMG_5823.jpeg" alt="Harsha Player Photo" />
         <div class="player-info">
-          <h2>Harsha  </h2>
+          <h2>Harsha</h2>
           <p><strong>Role:</strong> Batsman</p>
           <p><strong>Jersey:</strong> 17</p>
           <p>Anchors the innings with maturity and precision.</p>
@@ -114,8 +122,7 @@
 
       <!-- Player 2 -->
       <div class="player-card">
-        <img src="assets/assets/images
-/2e2f4c0f-1fbd-4387-8af5-1d9342db551b.jpeg" alt="Bojja Max">
+        <img src="assets/assets/images/2e2f4c0f-1fbd-4387-8af5-1d9342db551b.jpeg" alt="Bojja Max Player Photo" />
         <div class="player-info">
           <h2>Bojja Max</h2>
           <p><strong>Role:</strong> Bowler</p>
@@ -126,7 +133,7 @@
 
       <!-- Player 3 -->
       <div class="player-card">
-        <img src="assets/images/vishmitha.jpg" alt="Vishmitha">
+        <img src="assets/images/vishmitha.jpg" alt="Vishmitha Player Photo" />
         <div class="player-info">
           <h2>Vishmitha</h2>
           <p><strong>Role:</strong> Batting Allrounder</p>
@@ -137,7 +144,7 @@
 
       <!-- Player 4 -->
       <div class="player-card">
-        <img src="assets/images/rumesh.jpg" alt="Rumesh">
+        <img src="assets/images/rumesh.jpg" alt="Rumesh Player Photo" />
         <div class="player-info">
           <h2>Rumesh</h2>
           <p><strong>Role:</strong> Batsman</p>
@@ -148,7 +155,7 @@
 
       <!-- Player 5 -->
       <div class="player-card">
-        <img src="assets/images/sashith.jpg" alt="Sashith">
+        <img src="assets/images/sashith.jpg" alt="Sashith Player Photo" />
         <div class="player-info">
           <h2>Sashith</h2>
           <p><strong>Role:</strong> Batting Allrounder</p>
@@ -159,7 +166,7 @@
 
       <!-- Player 6 -->
       <div class="player-card">
-        <img src="assets/assets/images/IMG_9697.jpeg" alt="Charuka">
+        <img src="assets/assets/images/IMG_9697.jpeg" alt="Charuka Player Photo" />
         <div class="player-info">
           <h2>Charuka</h2>
           <p><strong>Role:</strong> Bowler</p>
@@ -168,290 +175,13 @@
         </div>
       </div>
 
-      <!-- Player 7 -->
-      <div class="player-card">
-        <img src="assets/assets/images
-/ca304c22-94a9-4fb5-9162-220735f9b807.jpeg" alt="Nalaka">
-        <div class="player-info">
-          <h2>Nalaka</h2>
-          <p><strong>Role:</strong> Batsman</p>
-          <p><strong>Jersey:</strong> 11</p>
-          <p>Elegant strokes and consistency at the top order.</p>
-        </div>
-      </div>
-
-      <!-- Player 8 -->
-      <div class="player-card">
-        <img src="assets/images/pathum.jpg" alt="Pathum">
-        <div class="player-info">
-          <h2>Pathum</h2>
-          <p><strong>Role:</strong> Batsman</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Middle-order batsman calm under pressure.</p>
-        </div>
-      </div>
-
-      <!-- Player 9 -->
-      <div class="player-card">
-        <img src="assets/images/jeewa.jpg" alt="Jeewa">
-        <div class="player-info">
-          <h2>Jeewa</h2>
-          <p><strong>Role:</strong> Batsman</p>
-          <p><strong>Jersey:</strong> 01</p>
-          <p>Efficient at rotating strike and finding gaps.</p>
-        </div>
-      </div>
-
-      <!-- Player 10 -->
-      <div class="player-card">
-        <img src="assets/images/chamara.jpg" alt="Chamara">
-        <div class="player-info">
-          <h2>Chamara</h2>
-          <p><strong>Role:</strong> Batsman</p>
-          <p><strong>Jersey:</strong> 55</p>
-          <p>Strong finisher, accelerates in final overs.</p>
-        </div>
-      </div>
-
-      <!-- Player 11 -->
-      <div class="player-card">
-        <img src="assets/images/amila.jpg" alt="Amila">
-        <div class="player-info">
-          <h2>Amila</h2>
-          <p><strong>Role:</strong> Batsman</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Youngster with promising front-foot play.</p>
-        </div>
-      </div>
-
-      <!-- Player 12 -->
-      <div class="player-card">
-        <img src="assets/images/sithumina.jpg" alt="Sithumina">
-        <div class="player-info">
-          <h2>Sithumina</h2>
-          <p><strong>Role:</strong> Batting Allrounder</p>
-          <p><strong>Jersey:</strong> 27</p>
-          <p>Left-hander and part-time spinner.</p>
-        </div>
-      </div>
-      <!-- Player 13 -->
-      <div class="player-card">
-        <img src="assets/images/renuka.jpg" alt="Renuka">
-        <div class="player-info">
-          <h2>Renuka</h2>
-          <p><strong>Role:</strong> Batting Allrounder</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Brings calm and balance with bat and ball.</p>
-        </div>
-      </div>
-
-      <!-- Player 14 -->
-      <div class="player-card">
-        <img src="assets/assets/images
-/f5cbf9f3-46bc-4541-9570-cf3bc871302d.jpeg" alt="Sumudu">
-        <div class="player-info">
-          <h2>Sumudu</h2>
-          <p><strong>Role:</strong> Batting Allrounder</p>
-          <p><strong>Jersey:</strong> 06</p>
-          <p>Smart decision-maker with depth in both departments.</p>
-        </div>
-      </div>
-    <div class="player-card">
-        <img src="assets/assets/images
-/IMG_9685.png" alt="KALUM">
-        <div class="player-info">
-          <h2>KALUM</h2>
-          <p><strong>Role:</strong> Batting Allrounder</p>
-          <p><strong>Jersey:</strong> 07</p>
-          <p>Smart decision-maker with depth in both departments.</p>
-        </div>
-      </div>
-      <!-- Player 15 -->
-      <div class="player-card">
-        <img src="assets/images/vishal.jpg" alt="Vishal">
-        <div class="player-info">
-          <h2>Vishal</h2>
-          <p><strong>Role:</strong> Batting Allrounder</p>
-          <p><strong>Jersey:</strong> 15</p>
-          <p>Sharp cricketing brain and technically sound.</p>
-        </div>
-      </div>
-
-      <!-- Player 16 -->
-      <div class="player-card">
-        <img src="assets/assets/images
-/847dd50c-45c8-43b2-a522-a032d289808f.jpeg" alt="Sachin">
-        <div class="player-info">
-          <h2>Sachin</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 99</p>
-          <p>Swings it both ways and hits down the order.</p>
-        </div>
-      </div>
-
-      <!-- Player 17 -->
-      <div class="player-card">
-        <img src="assets/images/eminda.jpg" alt="Eminda">
-        <div class="player-info">
-          <h2>Eminda</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 00</p>
-          <p>Versatile with the ball and handy lower-order bat.</p>
-        </div>
-      </div>
-
-      <!-- Player 18 -->
-      <div class="player-card">
-        <img src="assets/images/deshan.jpg" alt="Deshan">
-        <div class="player-info">
-          <h2>Deshan</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 98</p>
-          <p>Big hitter who adds power and useful overs.</p>
-        </div>
-      </div>
-
-      <!-- Player 19 -->
-      <div class="player-card">
-        <img src="assets/images/lal.jpg" alt="Lal">
-        <div class="player-info">
-          <h2>Lal</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 05</p>
-          <p>Tight line-and-length, plus lower-order grit.</p>
-        </div>
-      </div>
-
-      <!-- Player 20 -->
-      <div class="player-card">
-        <img src="assets/images/sagara.jpg" alt="Sagara">
-        <div class="player-info">
-          <h2>Sagara</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 100</p>
-          <p>Brings energy and match-changing pace.</p>
-        </div>
-      </div>
-
-      <!-- Player 21 -->
-      <div class="player-card">
-        <img src="assets/images/anuja.jpg" alt="Anuja">
-        <div class="player-info">
-          <h2>Anuja</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 07</p>
-          <p>Clever variations and a steady lower-order bat.</p>
-        </div>
-      </div>
-
-      <!-- Player 22 -->
-      <div class="player-card">
-        <img src="assets/images/tihan.jpg" alt="Tihan">
-        <div class="player-info">
-          <h2>Tihan</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> 18</p>
-          <p>Rising seam bowler and developing batter.</p>
-        </div>
-      </div>
-
-      <!-- Player 23 -->
-      <div class="player-card">
-        <img src="assets/images/samidu.jpg" alt="Samidu">
-        <div class="player-info">
-          <h2>Samidu</h2>
-          <p><strong>Role:</strong> Bowler</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Leads the attack with accuracy and control.</p>
-        </div>
-      </div>
-
-      <!-- Player 24 -->
-      <div class="player-card">
-        <img src="assets/images/krishantha.jpg" alt="Krishantha">
-        <div class="player-info">
-          <h2>Krishantha</h2>
-          <p><strong>Role:</strong> Bowler</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Specializes in spin with deceptive flight and turn.</p>
-        </div>
-      </div>
-      <!-- Player 25 -->
-      <div class="player-card">
-        <img src="assets/images/michel.jpg" alt="Michel">
-        <div class="player-info">
-          <h2>Michel</h2>
-          <p><strong>Role:</strong> Bowler</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Wrist spinner known for control and calm under pressure.</p>
-        </div>
-      </div>
-
-      <!-- Player 26 -->
-      <div class="player-card">
-        <img src="assets/images/lahiru.jpg" alt="Lahiru">
-        <div class="player-info">
-          <h2>Lahiru</h2>
-          <p><strong>Role:</strong> Bowler</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Aggressive pacer who bowls with intensity and fire.</p>
-        </div>
-      </div>
-
-      <!-- Player 27 -->
-      <div class="player-card">
-        <img src="assets/images/madura.jpg" alt="Madura">
-        <div class="player-info">
-          <h2>Madura</h2>
-          <p><strong>Role:</strong> Bowler</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Calm bowler with consistent line and length.</p>
-        </div>
-      </div>
-
-      <!-- Player 28 -->
-      <div class="player-card">
-        <img src="assets/images/sanjeewa.jpg" alt="Sanjeewa">
-        <div class="player-info">
-          <h2>Sanjeewa</h2>
-          <p><strong>Role:</strong> Bowling Allrounder</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Medium-pacer with a cool head in pressure situations.</p>
-        </div>
-      </div>
-
-      <!-- Player 29 -->
-      <div class="player-card">
-        <img src="assets/assets/images
-/c5522bb7-c92b-4cba-a982-5f17a190c737.jpeg" alt="Diwan">
-        <div class="player-info">
-          <h2>Diwan</h2>
-          <p><strong>Role:</strong> Batsman</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Stylish top-order batsman with technical finesse.</p>
-        </div>
-      </div>
-      <!-- Player 30 -->
-      <div class="player-card">
-        <img src="assets/assets/images
-/69f3d26a-194b-4709-9a35-53d6ba8f12af.jpeg" alt="Kapila">
-        <div class="player-info">
-          <h2>Kapila</h2>
-          <p><strong>Role:</strong> Boller</p>
-          <p><strong>Jersey:</strong> —</p>
-          <p>Emergin Bowler.</p>
-        </div>
-      </div>
-
-    </div> <!-- end of .player-grid -->
+      <!-- Add more player cards as needed -->
+    </div>
   </section>
 
-  <footer style="text-align:center; padding: 20px; background:#111; color:white;">
+  <footer>
     © 2025 Teripehe United Cricket Club
   </footer>
 
 </body>
 </html>
-
-
-      <!-- PLAYER CARDS START BELOW -->
