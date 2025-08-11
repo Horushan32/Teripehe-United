@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>TPL 2026 - Auction</title>
+<style>
+  :root { --accent:#ff5722; --bg:#f5f6f8; --panel:#222; }
+  body { font-family: "Segoe UI", Roboto, Arial; margin:0; background:var(--bg); display:flex; height:100vh; }
+  /* Leaderboard */
+  .leaderboard { width:300px; background:var(--panel); color:#fff; padding:16px; box-sizing:border-box; position:fixed; height:100vh; overflow:auto; }
+  .leaderboard h2 { margin:0 0 8px; color:var(--accent); text-align:center; }
+  .leaderboard table { width:100%; border-collapse:collapse; color:#fff; }
+  .leaderboard th { text-align:left; padding:6px; background:#333; color:#fff; font-size:14px }
+  .leaderboard td { padding:6px; border-bottom:1px solid #333; font-size:14px }
+  .team-row { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:6px 0; }
+  .team-row img { width:28px; height:28px; border-radius:4px; object-fit:cover; margin-right:6px; }
+
+  /* Main Content */
+  .main { margin-left:320px; padding:18px; flex:1; overflow:auto; }
+  header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
+  header h1 { margin:0; font-size:20px; }
+  .controls { display:flex; gap:8px; align-items:center; }
+  .btn { background:var(--accent); color:white; padding:8px 12px; border-radius:6px; border:none; cursor:pointer; }
+  .btn.secondary { background:#607d8b; }
+
+  /* Player grid */
+  .players { display:flex; flex-wrap:wrap; gap:12px; }
+  .player-card { width:160px; background:white; border-radius:10px; box-shadow:0 6px 14px rgba(0,0,0,0.08); padding:10px; text-align:center; cursor:pointer; }
+  .player-card img { width:120px; height:120px; object-fit:cover; border-radius:8px; }
+  .player-name { font-weight:600; margin:8px 0 4px; }
+  .player-base { color:#555; font-size:13px; }
+
+  /* Popup modal */
+  .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); justify-content:center; align-items:center; z-index:999; }
+  .modal.show { display:flex; }
+  .modal-box { width:520px; max-width:95%; background:#fff; border-radius:12px; padding:18px; box-sizing:border-box; position:relative; }
+  .modal-close { position:absolute; right:12px; top:8px; font-size:20px; cursor:pointer; }
+  .modal-left { float:left; width:180px; text-align:center; }
+  .modal-left img { width:150px; height:150px; object-fit:cover; border-radius:8px; }
+  .modal-right { margin-left:200px; min-height:150px; }
+  .price { font-size:34px; font-weight:700; color:#d32f2f; margin:6px 0; }
+  .price-controls { display:flex; gap:8px; margin-top:8px; }
+  .small-btn { padding:8px 12px; border-radius:6px; border:none; cursor:pointer; }
+  .small-btn.green { background:green; color:#fff; }
+  .small-btn.red { background:red; color:#fff; }
+  .small-btn.blue { background:#1976d2; color:#fff; }
+  .teams-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .team-select { display:flex; align-items:center; gap:6px; padding:6px 8px; border-radius:8px; background:#f1f1f1; cursor:pointer; }
+  .team-select img { width:26px; height:26px; border-radius:4px; object-fit:cover; }
+
+  /* sold badge */
+  .sold-badge { display:inline-block; background:green; color:#fff; padding:4px 8px; border-radius:6px; font-weight:700; font-size:13px; }
+
+  /* Player status on card */
+  .status { margin-top:6px; font-weight:600; }
+  .unsold { color:#d32f2f; }
+  .sold { color:green; }
+
+  /* Footer controls */
+  .footer-controls { margin-top:14px; display:flex; gap:10px; align-items:center; justify-content:flex-end; }
+  input[type=number] { width:70px; padding:6px; border-radius:6px; border:1px solid #ccc; }
+
+  @media (max-width:800px){
+    .leaderboard { display:none; position:static; width:100%; height:auto; }
+    body { flex-direction:column; }
+    .main { margin-left:0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Leaderboard -->
+<div class="leaderboard" id="leaderboard">
+  <h2>🏆 TPL Leaderboard</h2>
+  <div id="teamList"></div>
+  <hr style="border-color:#444">
+  <div style="font-size:13px; color:#aaa; margin-top:8px;">
+    Click a player to start auction. Use team buttons inside popup to mark SOLD.<br>
+    Auto-Auction can be toggled below.
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+  <header>
+    <h1>🏏 TPL 2026 - Auction Room</h1>
+    <div class="controls">
+      <label>Auto Auction:
+        <input type="checkbox" id="autoToggle" />
+      </label>
+      <label>Timer (s): <input id="autoTimer" type="number" value="12" min="3" /></label>
+      <button class="btn" id="nextBtn">Next Player</button>
+      <button class="btn secondary" id="resetBtn">Reset Auction</button>
+    </div>
+  </header>
+
+  <section>
+    <div class="players" id="playersContainer"></div>
+  </section>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-close" id="modalClose">&times;</div>
+
+    <div class="modal-left">
+      <img id="modalImage" src="" alt="player">
+      <div style="margin-top:8px" id="modalRole"></div>
+    </div>
+
+    <div class="modal-right">
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <div>
+          <div style="font-size:18px; font-weight:800" id="modalName"></div>
+          <div style="color:#777; margin-top:2px" id="modalBase"></div>
+        </div>
+        <div id="modalSoldBadge"></div>
+      </div>
+
+      <div class="price" id="modalPrice">₹ 0</div>
+
+      <div class="price-controls">
+        <button class="small-btn blue" id="incBtn">+ ₹50K</button>
+        <button class="small-btn blue" id="decBtn">- ₹50K</button>
+        <button class="small-btn green" id="markSoldBtn">Mark SOLD</button>
+        <button class="small-btn red" id="markUnsoldBtn">Mark UNSOLD</button>
+      </div>
+
+      <div style="margin-top:12px; font-weight:700">Select Team (click to assign buyer)</div>
+      <div class="teams-list" id="teamsList"></div>
+
+      <div class="footer-controls">
+        <div style="margin-right:auto; color:#666">Player <span id="playerIndex">0</span> / <span id="totalPlayers">0</span></div>
+        <div>
+          <button class="btn secondary" id="closeModalBtn">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ---------- Data: Teams & Players ---------- */
+const teams = [
+  { id: 'royals', name: 'Teripehe Royals', owner: 'Sapu', badge: 'placeholder-badge.png' },
+  { id: 'rangers', name: 'Teripehe Rangers', owner: 'Dilan sir / Eminda / Sanjeewa', badge: 'placeholder-badge.png' },
+  { id: 'blasters', name: 'Teripehe Blasters', owner: 'Charu', badge: 'placeholder-badge.png' },
+  { id: 'thunderbolt', name: 'Teripehe Thunderbolt', owner: 'Upul / Bande', badge: 'placeholder-badge.png' },
+  { id: 'predators', name: 'Teripehe Predators', owner: 'Tharidu', badge: 'placeholder-badge.png' },
+  { id: 'spartans', name: 'Teripehe Spartans', owner: 'Anurada', badge: 'placeholder-badge.png' },
+  { id: 'phoenix', name: 'Teripehe Phoenix', owner: 'Renuka', badge: 'placeholder-badge.png' },
+  { id: 'cyclones', name: 'Teripehe Cyclones', owner: 'Kavisha', badge: 'placeholder-badge.png' },
+  { id: 'vipers', name: 'Teripehe Vipers', owner: 'Sadun', badge: 'placeholder-badge.png' },
+  { id: 'strikers', name: 'Teripehe Strikers', owner: 'Jaye', badge: 'placeholder-badge.png' }
+];
+
+// sample players (replace images later)
+let players = [
+  { id:'p1', name:'Player One', role:'Batsman', base:500000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p2', name:'Player Two', role:'Allrounder', base:400000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p3', name:'Player Three', role:'Bowler', base:350000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p4', name:'Player Four', role:'Wicketkeeper', base:300000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p5', name:'Player Five', role:'Batsman', base:450000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p6', name:'Player Six', role:'Allrounder', base:250000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p7', name:'Player Seven', role:'Bowler', base:200000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p8', name:'Player Eight', role:'Batsman', base:600000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p9', name:'Player Nine', role:'Bowler', base:150000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 },
+  { id:'p10', name:'Player Ten', role:'Allrounder', base:100000, image:'placeholder-player.png', sold:false, buyer:null, soldPrice:0 }
+];
+
+/* ---------- State ---------- */
+let leaderboard = {}; // teamId -> total spend
+teams.forEach(t => leaderboard[t.id] = 0);
+
+let currentIndex = 0;
+let currentPrice = 0;
+let autoInterval = null;
+
+/* ---------- DOM refs ---------- */
+const playersContainer = document.getElementById('playersContainer');
+const teamListDiv = document.getElementById('teamList');
+const teamsListEl = document.getElementById('teamsList');
+const modal = document.getElementById('modal');
+const modalImage = document.getElementById('modalImage');
+const modalName = document.getElementById('modalName');
+const modalBase = document.getElementById('modalBase');
+const modalPrice = document.getElementById('modalPrice');
+const modalRole = document.getElementById('modalRole');
+const modalSoldBadge = document.getElementById('modalSoldBadge');
+const playerIndexEl = document.getElementById('playerIndex');
+const totalPlayersEl = document.getElementById('totalPlayers');
+const nextBtn = document.getElementById('nextBtn');
+const autoToggle = document.getElementById('autoToggle');
+const autoTimerInput = document.getElementById('autoTimer');
+const incBtn = document.getElementById('incBtn');
+const decBtn = document.getElementById('decBtn');
+const markSoldBtn = document.getElementById('markSoldBtn');
+const markUnsoldBtn = document.getElementById('markUnsoldBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const modalClose = document.getElementById('modalClose');
+const resetBtn = document.getElementById('resetBtn');
+
+/* ---------- Init UI ---------- */
+function renderPlayers() {
+  playersContainer.innerHTML = '';
+  players.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = 'player-card';
+    div.dataset.idx = idx;
+    div.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <div class="player-name">${p.name}</div>
+      <div class="player-base">Base: ₹ ${p.base.toLocaleString()}</div>
+      <div class="status ${p.sold ? 'sold' : 'unsold'}">${p.sold ? 'SOLD' : 'UNSOLD'}</div>
+    `;
+    div.onclick = () => openPlayer(idx);
+    playersContainer.appendChild(div);
+  });
+}
+
+function renderLeaderboard() {
+  teamListDiv.innerHTML = '';
+  teams.forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'team-row';
+    row.innerHTML = `
+      <div style="display:flex; align-items:center;">
+        <img src="${t.badge}" alt="${t.name}"><div style="font-weight:700">${t.name}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:13px; color:#aaa">${t.owner}</div>
+        <div style="font-size:15px; font-weight:800">₹ ${leaderboard[t.id].toLocaleString()}</div>
+      </div>
+    `;
+    teamListDiv.appendChild(row);
+  });
+}
+
+function renderTeamsListInModal() {
+  teamsListEl.innerHTML = '';
+  teams.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'team-select';
+    el.dataset.team = t.id;
+    el.innerHTML = `<img src="${t.badge}" alt="${t.name}"><div style="font-size:13px">${t.name}</div>`;
+    el.onclick = () => assignToTeam(t.id);
+    teamsListEl.appendChild(el);
+  });
+}
+
+function updatePlayerIndexUI() {
+  playerIndexEl.innerText = currentIndex + 1;
+  totalPlayersEl.innerText = players.length;
+}
+
+/* ---------- Auction Flow ---------- */
+function openPlayer(idx) {
+  currentIndex = idx;
+  const p = players[idx];
+  currentPrice = p.sold ? p.soldPrice : p.base;
+  modalImage.src = p.image;
+  modalName.innerText = p.name;
+  modalBase.innerText = 'Base: ₹ ' + p.base.toLocaleString();
+  modalRole.innerText = p.role;
+  modalPrice.innerText = '₹ ' + currentPrice.toLocaleString();
+  modalSoldBadge.innerHTML = p.sold ? `<div class="sold-badge">SOLD to ${p.buyer}</div>` : '';
+  modal.classList.add('show');
+  updatePlayerIndexUI();
+}
+
+function closeModal() {
+  modal.classList.remove('show');
+}
+
+function changePrice(amount) {
+  currentPrice = Math.max(0, currentPrice + amount);
+  modalPrice.innerText = '₹ ' + currentPrice.toLocaleString();
+}
+
+/* Assign player to team (SOLD) */
+function assignToTeam(teamId) {
+  const p = players[currentIndex];
+  if (!p) return;
+  if (p.sold) {
+    // remove previous sale from leaderboard first
+    leaderboard[p.buyer] -= p.soldPrice;
+  }
+  p.sold = true;
+  p.buyer = teamId;
+  p.soldPrice = currentPrice;
+  leaderboard[teamId] += currentPrice;
+  renderPlayers();
+  renderLeaderboard();
+  modalSoldBadge.innerHTML = `<div class="sold-badge">SOLD to ${teams.find(t=>t.id===teamId).name}</div>`;
+  // move to next player after short delay
+  setTimeout(() => {
+    closeModal();
+    autoNextIfOn();
+  }, 700);
+}
+
+/* Mark Unsold (if previously sold, remove from leaderboard) */
+function markUnsold() {
+  const p = players[currentIndex];
+  if (!p) return;
+  if (p.sold) {
+    // deduct previous sale
+    leaderboard[p.buyer] -= p.soldPrice;
+  }
+  p.sold = false;
+  p.buyer = null;
+  p.soldPrice = 0;
+  renderPlayers();
+  renderLeaderboard();
+  modalSoldBadge.innerHTML = '';
+  closeModal();
+  autoNextIfOn();
+}
+
+/* Next player (manual) */
+function goNext() {
+  if (currentIndex < players.length - 1) {
+    openPlayer(currentIndex + 1);
+  } else {
+    alert('Reached end of players list.');
+  }
+}
+
+/* Auto-auction */
+function startAuto() {
+  const seconds = Math.max(3, parseInt(autoTimerInput.value) || 12);
+  autoInterval = setInterval(() => {
+    // if modal open, countdown inside modal; otherwise open current or next
+    if (!modal.classList.contains('show')) {
+      // open currentIndex if not open yet, else go next
+      if (currentIndex < players.length) openPlayer(currentIndex);
+      else stopAuto();
+    } else {
+      // when modal is open, automatically mark unsold and go next if not sold
+      // we'll auto-mark unsold if still unsold after timer
+      // but here we simply go next if already sold or unsold -> close
+      closeModal();
+      if (currentIndex < players.length - 1) currentIndex++;
+      else stopAuto();
+      // open next after short delay:
+      setTimeout(() => { if (currentIndex < players.length) openPlayer(currentIndex); }, 200);
+    }
+  }, seconds * 1000);
+}
+
+function stopAuto() {
+  clearInterval(autoInterval);
+  autoInterval = null;
+  autoToggle.checked = false;
+}
+
+function autoNextIfOn() {
+  if (autoToggle.checked) {
+    // open next
+    if (currentIndex < players.length - 1) {
+      openPlayer(currentIndex + 1);
+    } else {
+      stopAuto();
+      alert('Auto-auction finished.');
+    }
+  }
+}
+
+/* ---------- Event wiring ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  renderPlayers();
+  renderLeaderboard();
+  renderTeamsListInModal();
+  updatePlayerIndexUI();
+});
+
+incBtn.onclick = () => changePrice(50000);
+decBtn.onclick = () => changePrice(-50000);
+markSoldBtn.onclick = () => {
+  // if no team selected, just open visually; we ask to click team to assign buyer
+  alert('Click a team badge below to assign buyer (SOLD).');
+};
+markUnsoldBtn.onclick = () => markUnsold();
+closeModalBtn.onclick = closeModal;
+modalClose.onclick = closeModal;
+
+nextBtn.onclick = () => {
+  if (!modal.classList.contains('show')) {
+    // open next
+    if (currentIndex < players.length - 1) openPlayer(currentIndex + 1);
+    else openPlayer(0);
+  } else {
+    // if modal open, close and go next
+    closeModal();
+    if (currentIndex < players.length - 1) openPlayer(currentIndex + 1);
+  }
+};
+
+resetBtn.onclick = () => {
+  if (!confirm('Reset auction? This will clear all sales and leaderboard totals.')) return;
+  players.forEach(p => { p.sold=false; p.buyer=null; p.soldPrice=0; });
+  teams.forEach(t => leaderboard[t.id] = 0);
+  renderPlayers(); renderLeaderboard();
+};
+
+autoToggle.onchange = () => {
+  if (autoToggle.checked) startAuto(); else stopAuto();
+};
+</script>
+</body>
+</html>
